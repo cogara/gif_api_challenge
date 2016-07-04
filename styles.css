@@ -8,10 +8,16 @@ body {
   background-color: rgba(50,50,50,.3);
 }
 .wrapper {
-
+  width: 95%;
+  margin: 5px auto;
+  border-radius: 10px 10px 0 0;
+  box-shadow: 1px 1px 1px 1px rgba(0,0,0,.1);
+  border-left: 1px solid rgba(0,0,0,.3);
+  border-right: 1px solid rgba(0,0,0,.3);
+  border-bottom: 1px solid rgba(0,0,0,.3);
 }
 
-.buttons button {
+button {
   padding: 5px;
 }
 
@@ -23,9 +29,15 @@ input {
   text-align: center;
 }
 
+.type-toggle div {
+  border-radius: 10px 10px 0 0;
+}
+
 #toggle-gif, #toggle-sticker {
   background-color: rgba(50,200,50,.5);
   background-color: rgba(70,70,70,.2);
+  border-bottom: 1px solid rgba(0,0,0,.3);
+  border-top: 1px solid rgba(0,0,0,.3);
   flex: 1 auto;
   margin: 0;
   padding: 10px;
@@ -34,8 +46,8 @@ input {
 #toggle-gif.active, #toggle-sticker.active {
   background-color: rgba(50,200,50,.9);
   background-color: burlywood;
-  border-top: 1px solid rgba(0,0,0,.6);
-  border-bottom: 1px solid rgba(0,0,0,.3);
+  border-top: 1px solid rgba(0,0,0,.8);
+  border-bottom: none;
 }
 
 .gifs-container, .stickers-container {
@@ -45,6 +57,7 @@ input {
   display: block;
   margin: 0;
   text-align: center;
+
 }
 
 
@@ -71,14 +84,22 @@ input {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  margin: 10px;
+  /*margin: 10px;*/
+  background-color: white;
+  padding: 10px;
+  border: 1px solid rgba(0,0,0,.3);
+  border-top: none;
   /*height: 250px;*/
 }
 
 .search-word {
-  width: 100%;
+  /*width: 100%;*/
   text-align: center;
-  margin: 10px;
+  /*margin: 10px;*/
+  padding: 10px;
+  background-color: white;
+  border-right: 1px solid rgba(0,0,0,.3);
+  border-left: 1px solid rgba(0,0,0,.3);
 }
 
 .result {
@@ -94,7 +115,7 @@ input {
   text-align: center;
   overflow: hidden;
   margin: 5px 0 0;
-  background-color: rgba(255,255,255,1);
+  background-color: rgba(240,240,240,1);
   padding: 0 5px 0 0;
   border-radius: 5px;
   border-top: 1px solid black;
