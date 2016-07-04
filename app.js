@@ -41,7 +41,7 @@ $(function() {
     $('.search-word').empty();
     $('.search-word').append('Showing Trending');
     $('.search-results').empty();
-    $.get('http://api.giphy.com/v1/' + type + '/trending?api_key=dc6zaTOxFJmzC')
+    $.get('https://api.giphy.com/v1/' + type + '/trending?api_key=dc6zaTOxFJmzC')
       .then(function(data){
         var searchData = data.data;
         for (var i = 0; i < 25; i++) {
@@ -67,7 +67,7 @@ $(function() {
     if (tags.length > 0) {
       tempTags = '&tag=' + tags;
     }
-    $.get('http://api.giphy.com/v1/' + type + '/random?api_key=dc6zaTOxFJmzC' + tempTags)
+    $.get('https://api.giphy.com/v1/' + type + '/random?api_key=dc6zaTOxFJmzC' + tempTags)
       .then(function(data){
         var tempRand = data.data;
 
