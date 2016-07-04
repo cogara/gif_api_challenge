@@ -82,12 +82,10 @@ $(function() {
   //initiate random searches for GIF and Stickers, append to screen
   $('.random').on('click','button',function(){
     var randType = $(this).data('type');
-    console.log(randType);
-    var tempTags = $('#search-random-'+randType);
+    var tempTags = $('#search-random-'+randType).val();
     $('.search-word').empty();
     $('.search-word').append('Showing Random ' + randType.toUpperCase());
     //request info from API for GIF and append to screen
-    console.log('API Query Random', 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC' + tempTags);
     searchRandom(randType+'s', tempTags);
   })
 
