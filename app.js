@@ -3,7 +3,7 @@ $(function() {
   var tempSearch;
 
   //sends API query for type ('gifs'/'stickers'), search term, and offset.
-  //append to DOM
+  //append to DOM, saves offset to allow displaying new pages of results.
   function searchAPI(type, search, offset) {
     tempResult = [];
 
@@ -25,15 +25,17 @@ $(function() {
             '<div class="url"><span class="link">URL:</span><a href="' + tempResultFullURL + '" target="_blank"> Full Size</a></div>'
           )
         }
-        $('.search-results').append('<div class="button-next"><button id="'+ type +'next">Next</button></div>');
+        $('.search-results').append('<div class="button-page"><button id="next" data-type="' + type + '">Next</button></div>');
         if (offSet > 4) {
-          $('.button-next').prepend('<button id="' + type + 'prev">Previous</button>');
+          $('.button-page').prepend('<button id="prev" data-type="' + type + '">Previous</button>');
         }
 
       },function() {
         console.log('searchAPI function failed');
       })
   }
+
+  //search trending function
   function searchTrending(type) {
     tempResult = [];
     $('.search-word').empty();
@@ -59,6 +61,7 @@ $(function() {
       })
   }
 
+  //function for searching random
   function searchRandom(type, tags) {
     var tempTags = '';
     if (tags.length > 0) {
@@ -79,6 +82,7 @@ $(function() {
         console.log('Request Failed');
       })
   }
+
   //initiate random searches for GIF and Stickers, append to screen
   $('.random').on('click','button',function(){
     var randType = $(this).data('type');
@@ -90,81 +94,49 @@ $(function() {
   })
 
   //Search database for specific GIF or sticker and display results
-  $('.button-search-gif').on('click',function(){
-    //reset page # on each new search
+  $('.all').on('click','button',function(){
+    //reset offSet for new search
+    offSet = 0;
+    //determine search for GIF or stickers
+    var tempType = $(this).data('type');
+    //store search term to be used in initial search and to get next page of results
+    tempSearch = $('#search-' + tempType).val();
+    $('.search-word').empty();
+    $('.search-word').append('Searching ' + tempType.toUpperCase() + 's for: '+ tempSearch);
+    //clear search input and search results from previous page
+    $('#search-' + tempType).val('');
+    $('.search-results').empty();
+    searchAPI(tempType+'s', tempSearch, offSet);
+  })
 
-    offSet = 0;
-    //store search term to be used in initial search and to get next page of results
-    tempSearch = $('#search-gif').val();
-    $('.search-word').empty();
-    $('.search-word').append('Searching JIFs for: '+ tempSearch);
-    //clear search input and search results from previous page
-    $('#search-gif').val('');
-    $('.search-results').empty();
-    // if (tempSearch.length < 3) {
-    //   $('.search-results').append('Search too short, please retry search with at least 3 characters');
-    //   console.log('Search too short');
-    //   return
-    // }
-    //inputs gifs as type, most recently stored search term, and offset
-    searchAPI('gifs', tempSearch, offSet);
-  });
-  $('.button-search-sticker').on('click',function(){
-    //reset page # on each new search
-    offSet = 0;
-    //store search term to be used in initial search and to get next page of results
-    tempSearch = $('#search-sticker').val();
-    $('.search-word').empty();
-    $('.search-word').append('Searching Stickers For: '+ tempSearch);
-    //clear search input and search results from previous page
-    $('#search-sticker').val('');
-    $('.search-results').empty();
-    // if (tempSearch.length < 3) {
-    //   console.log('Search too short');
-    //   return
-    // }
-    //inputs gifs as type, most recently stored search term, and offset
-    searchAPI('stickers', tempSearch, offSet);
-  });
+  //show trending GIF or Stickers
+  $('.trending').on('click','button',function(){
+    var trendType = $(this).data('type')
+    searchTrending(trendType);
+  })
 
   //next page on search results
-  $('.search-results').on('click','#gifsnext',function(){
+  $('.search-results').on('click','.button-page #next',function() {
+    var tempType = $(this).data('type');
     //clear previous results
     $('.search-results').find('.result').remove();
-    $('.button-next').remove();
+    $('.button-page').remove();
     //increases offset by 5 each time to get new page on next button click
     offSet += 5;
     //uses stored value from most recent search, and has an incremented offset of +5
-    searchAPI('gifs', tempSearch, offSet)
-  })
-  $('.search-results').on('click','#stickersnext',function(){
-    //clear previous results
-    $('.search-results').find('.result').remove();
-    $('.button-next').remove();
-    //increases offset by 5 each time to get new page on next button click
-    offSet += 5;
-    //uses stored value from most recent search, and has an incremented offset of +5
-    searchAPI('stickers', tempSearch, offSet)
+    searchAPI(tempType, tempSearch, offSet)
   })
 
   //prev page on search results
-  $('.search-results').on('click','#gifsprev',function(){
+  $('.search-results').on('click','.button-page #prev',function() {
+    var tempType = $(this).data('type');
     //clear previous results
     $('.search-results').find('.result').remove();
-    $('.button-next').remove();
-    //increases offset by 5 each time to get new page on next button click
+    $('.button-page').remove();
+    //decreases offset by 5 each time to get prev page on prev button click
     offSet -= 5;
-    //uses stored value from most recent search, and has an incremented offset of +5
-    searchAPI('gifs', tempSearch, offSet)
-  })
-  $('.search-results').on('click','#stickersprev',function(){
-    //clear previous results
-    $('.search-results').find('.result').remove();
-    $('.button-next').remove();
-    //increases offset by 5 each time to get new page on next button click
-    offSet -= 5;
-    //uses stored value from most recent search, and has an incremented offset of +5
-    searchAPI('stickers', tempSearch, offSet)
+    //uses stored value from most recent search, and has an decremented offset of -5
+    searchAPI(tempType, tempSearch, offSet)
   })
 
   //toggle search for GIF or Stickers
@@ -179,14 +151,6 @@ $(function() {
     $('#toggle-sticker').addClass('active');
     $('.gifs-container').addClass('hidden');
     $('#toggle-gif').removeClass('active');
-  })
-
-  //show trending GIF or Stickers
-  $('.button-trending-gif').on('click',function() {
-    searchTrending('gifs');
-  })
-  $('.button-trending-sticker').on('click',function() {
-    searchTrending('stickers');
   })
 
 })
