@@ -12,7 +12,7 @@ $(function() {
       return
     }
     console.log('API Query', 'http://api.giphy.com/v1/' + type + '/search?q=' + search + '&offset=' + offset + '&api_key=dc6zaTOxFJmzC');
-    $.get('http://api.giphy.com/v1/' + type + '/search?q=' + search + '&offset=' + offset + '&api_key=dc6zaTOxFJmzC')
+    $.get('https://api.giphy.com/v1/' + type + '/search?q=' + search + '&offset=' + offset + '&api_key=dc6zaTOxFJmzC')
       .then(function(data){
         var searchData = data.data;
         for (var i = 0; i < 5; i++) {
