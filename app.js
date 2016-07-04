@@ -59,48 +59,37 @@ $(function() {
       })
   }
 
-  //initiate random searches for GIF and Stickers, append to screen
-  $('.button-random-gif').on('click',function(){
-    var tempTags = $('#search-random-gif').val();
-    $('.search-word').empty();
-    $('.search-word').append('Showing Random JIF');
-    //add required url tags to append to end of API request
-    if (tempTags.length > 0) {
-      tempTags = '&tag=' + tempTags;
+  function searchRandom(type, tags) {
+    var tempTags = '';
+    if (tags.length > 0) {
+      tempTags = '&tag=' + tags;
     }
+    $.get('http://api.giphy.com/v1/' + type + '/random?api_key=dc6zaTOxFJmzC' + tempTags)
+      .then(function(data){
+        var tempRand = data.data;
 
+        $('.search-results').empty();
+        $('.search-results').append(
+          '<div class="random-result">' +
+          '<img src="' + tempRand.image_url + '" alt="' + type + '" />' +
+          '</div>' +
+          '<div class="url"><span class="link">URL:</span><a href="' + tempRand.image_url + '" target="_blank"> Direct Link</a></div>'
+          )
+      },function(){
+        console.log('Request Failed');
+      })
+  }
+  //initiate random searches for GIF and Stickers, append to screen
+  $('.random').on('click','button',function(){
+    var randType = $(this).data('type');
+    console.log(randType);
+    var tempTags = $('#search-random-'+randType);
+    $('.search-word').empty();
+    $('.search-word').append('Showing Random ' + randType.toUpperCase());
     //request info from API for GIF and append to screen
     console.log('API Query Random', 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC' + tempTags);
-    $.get('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC' + tempTags)
-      .then(function(data){
-        var randGIF = data.data;
-        $('.search-results').empty();
-        $('.search-results').append('<img src="' + randGIF.image_url + '" alt="GIF" />')
-      },function(){
-        console.log('Request Failed');
-      })
+    searchRandom(randType+'s', tempTags);
   })
-  $('.button-random-sticker').on('click',function(){
-    var tempTags = $('#search-random-sticker').val();
-    $('.search-word').empty();
-    $('.search-word').append('Showing Random Sticker');
-    //add required url tags to append to end of API request
-    if (tempTags.length > 0) {
-      tempTags = '&tag=' + tempTags;
-    }
-
-    //request info from API and append to screen
-    console.log('API Query Random', 'http://api.giphy.com/v1/stickers/random?api_key=dc6zaTOxFJmzC' + tempTags);
-    $.get('http://api.giphy.com/v1/stickers/random?api_key=dc6zaTOxFJmzC' + tempTags)
-      .then(function(data){
-        var randSticker = data.data;
-
-        $('.search-results').empty();
-        $('.search-results').append('<img src="' + randSticker.image_url + '" alt="Sticker" />')
-      },function(){
-        console.log('Request Failed');
-      })
-    })
 
   //Search database for specific GIF or sticker and display results
   $('.button-search-gif').on('click',function(){
