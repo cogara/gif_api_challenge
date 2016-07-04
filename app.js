@@ -1,5 +1,4 @@
 $(function() {
-  console.log('Ready!');
   var offSet;
   var tempSearch;
 
@@ -12,7 +11,7 @@ $(function() {
       $('.search-results').append('Search too short, please retry search with at least 3 characters');
       return
     }
-
+    console.log('API Query', 'http://api.giphy.com/v1/' + type + '/search?q=' + search + '&offset=' + offset + '&api_key=dc6zaTOxFJmzC');
     $.get('http://api.giphy.com/v1/' + type + '/search?q=' + search + '&offset=' + offset + '&api_key=dc6zaTOxFJmzC')
       .then(function(data){
         var searchData = data.data;
@@ -35,7 +34,6 @@ $(function() {
         console.log('searchAPI function failed');
       })
   }
-
   function searchTrending(type) {
     tempResult = [];
     $('.search-word').empty();
@@ -72,6 +70,7 @@ $(function() {
     }
 
     //request info from API for GIF and append to screen
+    console.log('API Query Random', 'http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC' + tempTags);
     $.get('http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC' + tempTags)
       .then(function(data){
         var randGIF = data.data;
@@ -91,16 +90,17 @@ $(function() {
     }
 
     //request info from API and append to screen
-    $.get('http://api.giphy.com/v1/stickers/random?api_key=dc6zaTOxFJmzC' + tempTags).then(function(data){
-      var randSticker = data.data;
-      console.log(randSticker);
+    console.log('API Query Random', 'http://api.giphy.com/v1/stickers/random?api_key=dc6zaTOxFJmzC' + tempTags);
+    $.get('http://api.giphy.com/v1/stickers/random?api_key=dc6zaTOxFJmzC' + tempTags)
+      .then(function(data){
+        var randSticker = data.data;
 
-      $('.search-results').empty();
-      $('.search-results').append('<img src="' + randSticker.image_url + '" alt="Sticker" />')
-    },function(){
-      console.log('Request Failed');
+        $('.search-results').empty();
+        $('.search-results').append('<img src="' + randSticker.image_url + '" alt="Sticker" />')
+      },function(){
+        console.log('Request Failed');
+      })
     })
-  })
 
   //Search database for specific GIF or sticker and display results
   $('.button-search-gif').on('click',function(){
