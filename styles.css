@@ -34,6 +34,10 @@ input {
   border-radius: 10px 10px 0 0;
 }
 
+#toggle-gif {
+  border-right: 1px solid rgba(0,0,0,.3);
+}
+
 #toggle-gif, #toggle-sticker {
   background-color: rgba(50,200,50,.5);
   background-color: rgba(70,70,70,.2);
