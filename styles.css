@@ -69,12 +69,13 @@ input {
 .buttons {
   padding: 15px;
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-around;
 }
 
 .buttons div {
   padding: 10px;
-  /*flex: 1 auto;*/
+  flex: 1 auto;
 }
 
 .hidden {
