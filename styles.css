@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: rgba(50,50,50,.3);
+}
+.wrapper {
+
+}
+
+.buttons button {
+  padding: 5px;
+}
+.type-toggle {
+  display: flex;
+  text-align: center;
+}
+
+#toggle-gif, #toggle-sticker {
+  background-color: rgba(50,200,50,.5);
+  background-color: rgba(70,70,70,.2);
+  flex: 1 auto;
+  margin: 0;
+  padding: 10px;
+}
+
+#toggle-gif.active, #toggle-sticker.active {
+  background-color: rgba(50,200,50,.9);
+  background-color: burlywood;
+  border-top: 1px solid rgba(0,0,0,.6);
+  border-bottom: 1px solid rgba(0,0,0,.3);
+}
+
+.gifs-container, .stickers-container {
+  background-color: rgba(50,200,50,.9);
+  background-color: burlywood;
+  padding: 15px;
+  display: block;
+  margin: 0;
+  text-align: center;
+}
+
+
+.buttons {
+  padding: 15px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.buttons div {
+  padding: 10px;
+  /*flex: 1 auto;*/
+}
+
+.hidden {
+  display: none;
+}
+
+.result {
+  display: inline-block;
+}
+
+.search-results {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  margin: 10px;
+  /*height: 250px;*/
+}
+
+.search-word {
+  width: 100%;
+  text-align: center;
+  margin: 10px;
+}
+
+.result {
+  flex: 0 auto;
+  display: flex;
+  margin: 10px;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.url {
+  flex: 0 auto;
+  text-align: center;
+  overflow: hidden;
+  margin: 5px 0 0;
+  background-color: rgba(255,255,255,1);
+  padding: 0 5px 0 0;
+  border-radius: 5px;
+  border-top: 1px solid black;
+  border-right: 1px solid black;
+  border-bottom: 1px solid black;
+}
+
+.url a {
+  text-decoration: none;
+  color: rgb(50,50,255);
+}
+
+.link {
+  display: inline-block;
+  background-color: rgba(200,200,200,1);
+  /*border-top: 1px solid black;*/
+  border-left: 1px solid black;
+  /*border-bottom: 1px solid black;*/
+  border-radius: 5px 0 0 5px;
+  padding: 5px;
+  text-align: left;
+}
+
+/*.result * {
+  flex: 0 auto;
+}*/
+
+.button-next {
+  margin: 20px 0;
+  text-align: center;
+  flex: 0 100%;
+}
