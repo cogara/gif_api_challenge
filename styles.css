@@ -90,22 +90,16 @@ input {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  /*margin: 10px;*/
   background-color: white;
   padding: 10px;
-  border: 1px solid rgba(0,0,0,.3);
   border-top: none;
-  /*height: 250px;*/
+  margin-top: -1px;
 }
 
 .search-word {
-  /*width: 100%;*/
   text-align: center;
-  /*margin: 10px;*/
   padding: 10px;
   background-color: white;
-  border-right: 1px solid rgba(0,0,0,.3);
-  border-left: 1px solid rgba(0,0,0,.3);
 }
 
 .result {
@@ -137,17 +131,11 @@ input {
 .link {
   display: inline-block;
   background-color: rgba(200,200,200,1);
-  /*border-top: 1px solid black;*/
   border-left: 1px solid black;
-  /*border-bottom: 1px solid black;*/
   border-radius: 5px 0 0 5px;
   padding: 5px;
   text-align: left;
 }
-
-/*.result * {
-  flex: 0 auto;
-}*/
 
 .button-page {
   margin: 20px 0;
